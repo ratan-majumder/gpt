@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔒 ChatGPT Access Unlocker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1877f2, #764ba2);
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 8px;
+            font-size: 22px;
+        }
+
+        h2 {
+            color: #1877f2;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .post-card {
+            background: #f4f7fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #1877f2;
+        }
+
+        .post-card.done {
+            border-left-color: #28a745;
+            background: #e7f7ec;
+        }
+
+        .post-card.reel {
+            border-left-color: #ff6b00;
+        }
+
+        .btn {
+            display: block;
+            background: #1877f2;
+            color: white;
+            padding: 10px;
+            border-radius: 6px;
+            text-decoration: none;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #145dbf;
+        }
+
+        .btn-reel {
+            background: #ff6b00;
+        }
+
+        .btn-reel:hover {
+            background: #e55a00;
+        }
+
+        .btn-mark {
+            background: #ff6b00;
+            width: auto;
+            padding: 6px 12px;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .btn-mark.done {
+            background: #28a745;
+        }
+
+        .btn-unlock {
+            background: #ff6b00;
+            font-size: 16px;
+            padding: 14px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .btn-unlock:disabled {
+            background: #aaa;
+            cursor: not-allowed;
+        }
+
+        .progress {
+            background: #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 10px;
+            margin: 10px 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #1877f2);
+            width: 0%;
+            transition: 0.3s;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        #timer {
+            color: #ff6b00;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .login-box input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            margin: 8px 0;
+            font-size: 15px;
+        }
+
+        .login-box input:focus {
+            outline: none;
+            border-color: #1877f2;
+        }
+
+        .info {
+            background: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .note {
+            background: #d1ecf1;
+            color: #0c5460;
+            padding: 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            margin: 8px 0;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin: 5px 0;
+            font-size: 13px;
+        }
+
+        .success {
+            color: green;
+            text-align: center;
+            margin: 5px 0;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .fb-embed {
+            background: white;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            overflow: hidden;
+            min-height: 50px;
+        }
+
+        .post-link {
+            display: inline-block;
+            color: #1877f2;
+            font-size: 12px;
+            margin-top: 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Facebook SDK -->
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v18.0">
+    </script>
+
+    <div class="container">
+
+        <!-- ============ PAGE 1: TASK PAGE ============ -->
+        <div id="taskPage">
+
+            <div class="box">
+                <h1>🔒 ChatGPT Access Unlocker</h1>
+                <p class="subtitle">নিচের সব কাজ সম্পন্ন করুন তারপর Access পাবেন</p>
+                <div class="progress">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <p class="progress-text" id="progressText">0 / 9 Complete</p>
+            </div>
+
+            <!-- Step 1: Follow Profile -->
+            <div class="box" id="followBox">
+                <h2>✅ Step 1: Profile Follow করুন</h2>
+                <p class="note">
+                    📌 নিচের button এ click করে Facebook profile এ যান → <b>"Follow"</b> button এ click করুন → ফিরে এসে
+                    "✓ Follow করেছি" এ click করুন
+                </p>
+                <a href="https://www.facebook.com/profile.php?id=61552305287329" target="_blank" class="btn"
+                    onclick="setTimeout(() => document.getElementById('followMark').disabled = false, 3000)">
+                    📘 Facebook Profile এ যান (Follow করুন)
+                </a>
+                <button id="followMark" class="btn btn-mark" onclick="markDone('follow', this)" disabled>
+                    ✓ Follow করেছি
+                </button>
+            </div>
+
+            <!-- Posts Section -->
+            <div class="box">
+                <h2>✅ Step 2: সব Post & Reel এ Like + Comment করুন</h2>
+                <p class="note">
+                    📝 <b>Posts (1, 2, 7, 8):</b> এখান থেকেই Like + Comment করতে পারবেন<br>
+                    🎬 <b>Reels (3, 4, 5, 6):</b> Button এ click করে Facebook এ গিয়ে Like + Comment করুন
+                </p>
+                <div id="postsContainer"></div>
+            </div>
+
+            <div class="box">
+                <button class="btn btn-unlock" id="unlockBtn" disabled onclick="startUnlock()">
+                    🔓 সব কাজ শেষ করুন তারপর Unlock হবে
+                </button>
+                <p id="timer"></p>
+            </div>
+        </div>
+
+        <!-- ============ PAGE 2: LOGIN PAGE ============ -->
+        <div class="box login-box hidden" id="loginPage">
+            <h1>🔑 Enter Your Details</h1>
+            <p class="subtitle">ChatGPT Access নিতে নিচের তথ্য দিন</p>
+
+            <div class="info">
+                ℹ️ <strong>Password format:</strong> @username123@<br>
+                উদাহরণ: Username "rahim" → Password <b>@rahim123@</b>
+            </div>
+
+            <input type="text" id="username" placeholder="Enter Your Username" autocomplete="off">
+            <input type="password" id="password" placeholder="Enter Your Password">
+
+            <p class="error hidden" id="errorMsg">❌ ভুল Password!</p>
+            <p class="success hidden" id="successMsg">✅ Login সফল! Redirect হচ্ছে...</p>
+
+            <button class="btn btn-unlock" onclick="doLogin()">🚀 Login & Access ChatGPT</button>
+        </div>
+
+    </div>
+
+    <script>
+        // ===== Facebook Posts =====
+        // type: "post" = embed-able, "reel" = button only
+        const posts = [
+            { num: 1, type: "post", url: "https://www.facebook.com/permalink.php?story_fbid=pfbid0xS3ArGwXNpWwXogqnRcvqyQYccGtJNLAgQgjiHB6XhoSi2HHc2dQQg1FJP2tMujcl&id=61552305287329" },
+            { num: 2, type: "post", url: "https://www.facebook.com/permalink.php?story_fbid=pfbid02JpM6XbLjkCoYNpKdMXTSjZ4Z1YrdMhSgPAKeSP6vsFTUyPqvS3ZF1AHhgAq4Nx9ml&id=61552305287329" },
+            { num: 3, type: "reel", url: "https://www.facebook.com/reel/1325432769470339" },
+            { num: 4, type: "reel", url: "https://www.facebook.com/reel/1263161279351846" },
+            { num: 5, type: "reel", url: "https://www.facebook.com/reel/1138403195108436" },
+            { num: 6, type: "reel", url: "https://www.facebook.com/reel/1500223204815122" },
+            { num: 7, type: "post", url: "https://www.facebook.com/permalink.php?story_fbid=pfbid0mfMeeFVkwimXq7f1iuuGM4r8Lt8192YM9dJ48BvXhtN8nWwH2fhmp4ftha6NSotRl&id=61552305287329" },
+            { num: 8, type: "post", url: "https://www.facebook.com/permalink.php?story_fbid=122283971762076842&id=61552305287329" }
+        ];
+
+        const FINAL_URL = "https://sharedchat.cn/#/";
+
+        // Track completion
+        let completed = { follow: false };
+        posts.forEach(p => completed["post" + p.num] = false);
+
+        // Build post cards
+        const container = document.getElementById("postsContainer");
+        posts.forEach((p) => {
+            const card = document.createElement("div");
+            card.className = "post-card" + (p.type === "reel" ? " reel" : "");
+            card.id = "card-post" + p.num;
+
+            if (p.type === "post") {
+                // Embed Like & Comment plugin for regular posts
+                card.innerHTML = `
+        <h3 style="font-size:14px; color:#333; margin-bottom:8px;">📌 Post ${p.num}</h3>
+        
+        <div class="fb-embed">
+          <div class="fb-like" 
+            data-href="${p.url}" 
+            data-layout="button_count" 
+            data-action="like" 
+            data-size="large" 
+            data-share="true">
+          </div>
+        </div>
+        
+        <div class="fb-embed" style="margin-top:8px;">
+          <div class="fb-comments" 
+            data-href="${p.url}" 
+            data-width="100%" 
+            data-numposts="2"
+            data-order-by="reverse_time">
+          </div>
+        </div>
+        
+        <a href="${p.url}" target="_blank" class="post-link">🔗 Facebook এ open করুন</a>
+        <button class="btn btn-mark" onclick="markDone('post${p.num}', this)">✓ Like + Comment করেছি</button>
+      `;
+            } else {
+                // Reels - just a button to open in Facebook
+                card.innerHTML = `
+        <h3 style="font-size:14px; color:#333; margin-bottom:8px;">🎬 Reel ${p.num}</h3>
+        <p style="font-size:12px; color:#666; margin-bottom:8px;">
+          এই Reel টি Facebook এ খুলে Like + Comment করুন
+        </p>
+        <a href="${p.url}" target="_blank" class="btn btn-reel" 
+           onclick="setTimeout(() => document.getElementById('mark-post${p.num}').disabled = false, 3000)">
+          🎬 Reel ${p.num} খুলুন
+        </a>
+        <button id="mark-post${p.num}" class="btn btn-mark" onclick="markDone('post${p.num}', this)" disabled>
+          ✓ Like + Comment করেছি
+        </button>
+      `;
+            }
+            container.appendChild(card);
+        });
+
+        function markDone(key, btn) {
+            completed[key] = true;
+            btn.classList.add("done");
+            btn.innerText = "✅ সম্পন্ন হয়েছে";
+            btn.disabled = true;
+
+            if (key === "follow") {
+                document.getElementById("followBox").style.background = "#e7f7ec";
+            } else {
+                document.getElementById("card-" + key).classList.add("done");
+            }
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const total = Object.keys(completed).length;
+            const done = Object.values(completed).filter(v => v).length;
+            const percent = (done / total) * 100;
+            document.getElementById("progressBar").style.width = percent + "%";
+            document.getElementById("progressText").innerText = `${done} / ${total} Complete`;
+
+            if (done === total) {
+                const btn = document.getElementById("unlockBtn");
+                btn.disabled = false;
+                btn.innerText = "🔓 Unlock Access (Click Now!)";
+            }
+        }
+
+        function startUnlock() {
+            let time = 10;
+            const btn = document.getElementById("unlockBtn");
+            btn.disabled = true;
+            const timerEl = document.getElementById("timer");
+
+            const interval = setInterval(() => {
+                timerEl.innerText = `⏳ অপেক্ষা করুন... ${time} সেকেন্ড`;
+                time--;
+                if (time < 0) {
+                    clearInterval(interval);
+                    document.getElementById("taskPage").classList.add("hidden");
+                    document.getElementById("loginPage").classList.remove("hidden");
+                    window.scrollTo(0, 0);
+                }
+            }, 1000);
+        }
+
+        function doLogin() {
+            const user = document.getElementById("username").value.trim();
+            const pass = document.getElementById("password").value.trim();
+            const errorEl = document.getElementById("errorMsg");
+            const successEl = document.getElementById("successMsg");
+
+            errorEl.classList.add("hidden");
+            successEl.classList.add("hidden");
+
+            if (!user) {
+                errorEl.innerText = "❌ Username দিন!";
+                errorEl.classList.remove("hidden");
+                return;
+            }
+
+            const correctPass = "@" + user + "123@";
+            if (pass === correctPass) {
+                successEl.classList.remove("hidden");
+                setTimeout(() => {
+                    window.location.href = FINAL_URL;
+                }, 1500);
+            } else {
+                errorEl.innerText = "❌ ভুল Password! সঠিক format: @" + user + "123@";
+                errorEl.classList.remove("hidden");
+            }
+        }
+    </script>
+
+</body>
+
+</html>
